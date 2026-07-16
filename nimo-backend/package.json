@@ -1,0 +1,69 @@
+{
+  "name": "nimo-backend",
+  "version": "1.0.0",
+  "description": "NIMO - Desktop voice assistant backend (Electron + Node.js)",
+  "main": "electron/main.js",
+  "author": "yourname",
+  "license": "MIT",
+  "productName": "NIMO",
+  "scripts": {
+    "start": "electron .",
+    "dev": "concurrently --names \"UI,BE\" --prefix-colors \"cyan,magenta\" \"npm run ui:dev\" \"electron .\"",
+    "ui:dev": "npm run --prefix ../nimo-os dev",
+    "build:ui": "npm run --prefix ../nimo-os build",
+    "build": "npm run build:ui && electron-builder",
+    "test": "node --test",
+    "typecheck": "node -e \"const fs=require('fs'),path=require('path');function walk(d){let o=[];for(const f of fs.readdirSync(d)){const p=path.join(d,f),s=fs.statSync(p);if(s.isDirectory())o=o.concat(walk(p));else if(f.endsWith('.js'))o.push(p)}return o}for(const f of walk('.')){ try{ new Function(fs.readFileSync(f,'utf8')); console.log('OK '+f) }catch(e){ console.error('FAIL '+f+' '+e.message); process.exitCode=1 } }\""
+  },
+  "dependencies": {
+    "@anthropic-ai/sdk": "^0.39.0",
+    "@google/genai": "^2.11.0",
+    "dotenv": "^16.4.5",
+    "fastest-levenshtein": "^1.0.16",
+    "keytar": "^7.9.0",
+    "loudness": "^0.4.1"
+  },
+  "devDependencies": {
+    "concurrently": "^9.1.0",
+    "electron": "^33.0.0",
+    "electron-builder": "^25.1.8"
+  },
+  "build": {
+    "productName": "NIMO",
+    "appId": "com.yourname.nimo",
+    "asar": true,
+    "extraResources": [
+      "assets/"
+    ],
+    "files": [
+      "electron/**/*",
+      "core/**/*",
+      "services/**/*",
+      "config/**/*",
+      "utils/**/*",
+      "assets/**/*"
+    ],
+    "win": {
+      "target": [
+        "nsis"
+      ],
+      "icon": "assets/icon.ico"
+    },
+    "mac": {
+      "target": [
+        "dmg"
+      ],
+      "icon": "assets/icon.icns"
+    },
+    "linux": {
+      "target": [
+        "AppImage"
+      ],
+      "icon": "assets/icon.png"
+    }
+  },
+  "allow-scripts": {
+    "electron": true,
+    "keytar": true
+  }
+}

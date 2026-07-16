@@ -1,0 +1,6 @@
+{
+  "name": "NIMO OS",
+  "description": "An emotionally-expressive cybernetic companion assistant built with React, Tailwind CSS, Express, and Gemini API, featuring voice control, real-time command execution, dynamic facial states, and a visual event log.",
+  "requestFramePermissions": ["microphone"],
+  "majorCapabilities": ["MAJOR_CAPABILITY_SERVER_SIDE_GEMINI_API"]
+}

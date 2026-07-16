@@ -1,0 +1,102 @@
+@import url('https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,600;1,400;1,600&family=Inter:wght@400;500;600;700&family=JetBrains+Mono:wght@400;500;700&display=swap');
+@import "tailwindcss";
+
+@theme {
+  --font-sans: "Inter", ui-sans-serif, system-ui, sans-serif;
+  --font-serif: "Playfair Display", Georgia, Cambria, "Times New Roman", Times, serif;
+  --font-mono: "JetBrains Mono", ui-monospace, SFMono-Regular, monospace;
+
+  --color-primary: #ffffff;
+  --color-primary-container: rgba(255, 255, 255, 0.08);
+  --color-on-primary-container: #ffffff;
+  --color-face-screen: #000000;
+  --color-app-bg: #050505;
+  --color-surface-container-lowest: #0a0a0a;
+  --color-on-surface-variant: rgba(255, 255, 255, 0.4);
+  --color-outline-variant: rgba(255, 255, 255, 0.05);
+
+  --color-status-happy: #10b981;
+  --color-status-error: #ef4444;
+  --color-status-confused: #f59e0b;
+  --color-status-music: #ec4899;
+  --color-status-thinking: #3b82f6;
+  --color-status-listening: #10b981;
+}
+
+@layer utilities {
+  /* Blinking eye animation */
+  @keyframes blink {
+    0%, 90%, 100% {
+      transform: scaleY(1);
+    }
+    95% {
+      transform: scaleY(0.05);
+    }
+  }
+
+  .blinking {
+    animation: blink 4s infinite ease-in-out;
+  }
+
+  /* Shaking robot face shell (Error state) */
+  @keyframes shake {
+    0%, 100% { transform: translate(0, 0) rotate(0deg); }
+    10% { transform: translate(-2px, -1px) rotate(-0.5deg); }
+    20% { transform: translate(-3px, 0px) rotate(0.5deg); }
+    30% { transform: translate(0px, 2px) rotate(0deg); }
+    40% { transform: translate(1px, -1px) rotate(0.5deg); }
+    50% { transform: translate(-1px, 2px) rotate(-0.5deg); }
+    60% { transform: translate(-3px, 1px) rotate(0deg); }
+    70% { transform: translate(2px, 1px) rotate(-0.5deg); }
+    80% { transform: translate(-1px, -1px) rotate(0.5deg); }
+    90% { transform: translate(2px, 2px) rotate(0deg); }
+  }
+
+  .face-shake {
+    animation: shake 0.3s infinite ease-in-out;
+  }
+
+  /* Talking eye bounce */
+  @keyframes talkingEye {
+    0%, 100% { transform: scaleY(1); }
+    50% { transform: scaleY(0.75) translateY(4px); }
+  }
+
+  .eye-talking {
+    animation: talkingEye 0.25s infinite ease-in-out;
+  }
+
+  /* Listening glow effect */
+  .listening-glow {
+    filter: drop-shadow(0 0 12px rgba(16, 185, 129, 0.6));
+  }
+
+  /* Music eye rhythm */
+  @keyframes musicEye {
+    0%, 100% { transform: translateY(0); }
+    50% { transform: translateY(-8px) scaleY(1.1); }
+  }
+
+  .eye-music {
+    animation: musicEye 0.4s infinite ease-in-out;
+  }
+
+  /* Custom clean scrollbar */
+  .custom-scrollbar::-webkit-scrollbar {
+    width: 4px;
+    height: 4px;
+  }
+
+  .custom-scrollbar::-webkit-scrollbar-track {
+    background: transparent;
+  }
+
+  .custom-scrollbar::-webkit-scrollbar-thumb {
+    background: rgba(255, 255, 255, 0.08);
+    border-radius: 9999px;
+  }
+
+  .custom-scrollbar::-webkit-scrollbar-thumb:hover {
+    background: rgba(255, 255, 255, 0.2);
+  }
+}
