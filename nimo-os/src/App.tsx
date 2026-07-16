@@ -398,7 +398,7 @@ const toggleListening = () => {
       {/* Mobile Top Header */}
       <header className="md:hidden flex items-center justify-between px-6 py-4 border-b border-outline-variant bg-[#0a0a0a] z-50">
         <div className="flex items-center gap-2">
-          <div className="h-2 w-2 rounded-full bg-[#10b981] shadow-[0_0_8px_rgba(16,185,129,0.4)]" />
+          <div className="h-2 w-2 rounded-full bg-[#3de8c4] shadow-[0_0_8px_rgba(61,232,196,0.4)]" />
           <h1 className="font-serif italic tracking-tight text-white text-lg">Nimo.</h1>
         </div>
         <div className="flex items-center gap-4">
@@ -436,7 +436,7 @@ const toggleListening = () => {
             onClick={() => { setActiveTab("core"); setIsMobileMenuOpen(false); }}
             className={`flex items-center gap-3 px-4 py-3 rounded-sm font-mono text-[10px] uppercase tracking-[0.15em] transition-all duration-200 ${
               activeTab === "core" 
-                ? "bg-white/5 text-white border-l-2 border-white/60 font-semibold" 
+                ? "bg-[#3de8c4]/5 text-[#3de8c4] border-l-2 border-[#3de8c4] font-semibold" 
                 : "text-white/50 hover:text-white hover:bg-white/[0.02]"
             }`}
           >
@@ -448,7 +448,7 @@ const toggleListening = () => {
             onClick={() => { setActiveTab("logs"); setIsMobileMenuOpen(false); }}
             className={`flex items-center gap-3 px-4 py-3 rounded-sm font-mono text-[10px] uppercase tracking-[0.15em] transition-all duration-200 ${
               activeTab === "logs" 
-                ? "bg-white/5 text-white border-l-2 border-white/60 font-semibold" 
+                ? "bg-[#3de8c4]/5 text-[#3de8c4] border-l-2 border-[#3de8c4] font-semibold" 
                 : "text-white/50 hover:text-white hover:bg-white/[0.02]"
             }`}
           >
@@ -460,7 +460,7 @@ const toggleListening = () => {
             onClick={() => { setActiveTab("personality"); setIsMobileMenuOpen(false); }}
             className={`flex items-center gap-3 px-4 py-3 rounded-sm font-mono text-[10px] uppercase tracking-[0.15em] transition-all duration-200 ${
               activeTab === "personality" 
-                ? "bg-white/5 text-white border-l-2 border-white/60 font-semibold" 
+                ? "bg-[#3de8c4]/5 text-[#3de8c4] border-l-2 border-[#3de8c4] font-semibold" 
                 : "text-white/50 hover:text-white hover:bg-white/[0.02]"
             }`}
           >
@@ -472,7 +472,7 @@ const toggleListening = () => {
             onClick={() => { setActiveTab("sensors"); setIsMobileMenuOpen(false); }}
             className={`flex items-center gap-3 px-4 py-3 rounded-sm font-mono text-[10px] uppercase tracking-[0.15em] transition-all duration-200 ${
               activeTab === "sensors" 
-                ? "bg-white/5 text-white border-l-2 border-white/60 font-semibold" 
+                ? "bg-[#3de8c4]/5 text-[#3de8c4] border-l-2 border-[#3de8c4] font-semibold" 
                 : "text-white/50 hover:text-white hover:bg-white/[0.02]"
             }`}
           >
@@ -496,7 +496,7 @@ const toggleListening = () => {
             onClick={toggleListening}
             className={`w-full flex items-center justify-center gap-2 px-4 py-3 rounded-sm font-mono text-[10px] uppercase tracking-[0.15em] transition-all duration-200 active:scale-95 border ${
               isListening
-                ? "bg-[#10b981]/15 text-[#10b981] border-[#10b981]/30 animate-pulse font-semibold"
+                ? "bg-[#3de8c4]/15 text-[#3de8c4] border-[#3de8c4]/30 animate-pulse font-semibold"
                 : "bg-white/5 text-white/70 border-white/5 hover:border-white/20 hover:bg-white/10"
             }`}
           >
@@ -532,8 +532,8 @@ const toggleListening = () => {
             </div>
             <div className="hidden sm:block w-px h-8 bg-white/10"></div>
             <div className="flex gap-2 items-center">
-              <div className="h-2 w-2 rounded-full bg-emerald-500 shadow-[0_0_8px_rgba(16,185,129,0.4)]"></div>
-              <span className="text-[10px] text-emerald-500 uppercase font-bold tracking-[0.2em]">Online</span>
+              <div className="h-2 w-2 rounded-full bg-[#3de8c4] shadow-[0_0_8px_rgba(61,232,196,0.4)]"></div>
+              <span className="text-[10px] text-[#3de8c4] uppercase font-bold tracking-[0.2em]">Online</span>
             </div>
             {/* Desktop Logs Sidebar Toggle */}
             <div className="hidden md:block w-px h-8 bg-white/10"></div>
@@ -567,8 +567,8 @@ const toggleListening = () => {
             >
               
               {/* Info Frame Notice (Microphone permissions inside iframes) */}
-              <div className="max-w-md w-full bg-[#0a0a0a] border border-white/5 p-4 rounded-sm flex gap-3 text-xs text-white/40 backdrop-blur-sm">
-                <AlertCircle className="h-4 w-4 text-white shrink-0 mt-0.5" />
+              <div className="max-w-md w-full bg-[#0a0a0a] border border-[#3de8c4]/5 p-4 rounded-sm flex gap-3 text-xs text-white/40 backdrop-blur-sm">
+                <AlertCircle className="h-4 w-4 text-[#3de8c4] shrink-0 mt-0.5" />
                 <div>
                   <p className="text-white font-serif italic text-sm mb-1">Interactive Assistant</p>
                   <p>Speak to NIMO using the microphone or type commands directly into the terminal below. If voice captures are blocked, type your query!</p>
@@ -577,20 +577,23 @@ const toggleListening = () => {
 
               {/* EMO Robot Head Visual Architecture */}
               <div className="relative flex items-center justify-center scale-100 sm:scale-110 lg:scale-120">
+                {/* Headphone arch strap (gorgeous extra design detail mimicking the photo) */}
+                <div className="absolute -top-5 w-[240px] h-[80px] rounded-t-[120px] border-t-8 border-x-4 border-t-[#f3f4f6] border-x-transparent z-0 pointer-events-none opacity-90 shadow-[0_-2px_10px_rgba(0,0,0,0.1)]" />
+
                 {/* Ear Tabs left */}
-                <div className={`absolute -left-[16px] w-[20px] h-[52px] rounded-l-sm border-l border-y border-white/5 z-0 bg-[#0a0a0a] ${
+                <div className={`absolute -left-[16px] w-[20px] h-[52px] rounded-l-md border-l border-y border-[#d4d4d8] z-0 bg-[#e4e4e7] ${
                   faceState === 'error' ? 'face-shake bg-status-error/10' : ''
                 }`} />
 
                 {/* Main Hardware Outer Shell */}
                 <div className={`
-                  relative w-[280px] h-[280px] bg-black border border-white/5 rounded-[32px] flex items-center justify-center z-10 shadow-[0_0_50px_rgba(0,0,0,0.8)] transition-all duration-300
+                  relative w-[280px] h-[280px] bg-gradient-to-b from-[#fbfbfc] to-[#f3f4f6] border border-[#e4e4e7] rounded-[32px] flex items-center justify-center z-10 shadow-[0_20px_50px_rgba(0,0,0,0.4),0_0_30px_rgba(61,232,196,0.05)] transition-all duration-300
                   ${faceState === 'error' ? 'face-shake border-status-error/30 ring-1 ring-status-error/10' : ''}
                   ${faceState === 'happy' ? 'border-status-happy/30' : ''}
                   ${faceState === 'music' ? 'border-status-music/30' : ''}
                 `}>
                   {/* Glass Inner Screen */}
-                  <div className="relative w-[232px] h-[232px] bg-[#050505] rounded-[22px] overflow-hidden flex flex-col items-center justify-center border border-white/5">
+                  <div className="relative w-[232px] h-[232px] bg-[#06080c] rounded-[22px] overflow-hidden flex flex-col items-center justify-center border border-[#1e293b]">
                     
                     {/* Gloss / Sheen Highlight Overlays */}
                     <div className="absolute top-0 left-0 right-0 h-1/2 bg-gradient-to-b from-white/2 to-transparent pointer-events-none rounded-t-[22px]" />
@@ -607,15 +610,15 @@ const toggleListening = () => {
                         {/* Eye Left */}
                         <div 
                           className={`
-                            relative bg-white rounded-[14px] transition-all duration-300 ease-out
-                            ${faceState === 'idle' ? 'w-[64px] h-[80px] blinking' : ''}
-                            ${faceState === 'listening' ? 'w-[64px] h-[88px] bg-status-listening' : ''}
-                            ${faceState === 'thinking' ? 'w-[64px] h-[38px] rounded-t-[14px] rounded-b-[4px] bg-status-thinking' : ''}
-                            ${faceState === 'talking' ? 'w-[64px] h-[80px] eye-talking' : ''}
-                            ${faceState === 'happy' ? 'w-[72px] h-[68px] rounded-t-[40px] rounded-b-[4px] bg-status-happy' : ''}
-                            ${faceState === 'confused' ? 'w-[52px] h-[72px] rounded-t-[14px] rounded-b-[4px] -rotate-6 bg-status-confused' : ''}
-                            ${faceState === 'error' ? 'w-[64px] h-[16px] rounded-[4px] bg-status-error' : ''}
-                            ${faceState === 'music' ? 'w-[64px] h-[80px] rounded-[20px] eye-music bg-status-music' : ''}
+                            relative rounded-[14px] transition-all duration-300 ease-out
+                            ${faceState === 'idle' ? 'w-[64px] h-[80px] blinking eye-idle' : ''}
+                            ${faceState === 'listening' ? 'w-[64px] h-[88px] eye-listening' : ''}
+                            ${faceState === 'thinking' ? 'w-[64px] h-[38px] rounded-t-[14px] rounded-b-[4px] eye-thinking' : ''}
+                            ${faceState === 'talking' ? 'w-[64px] h-[80px] eye-talking eye-idle' : ''}
+                            ${faceState === 'happy' ? 'w-[72px] h-[68px] rounded-t-[40px] rounded-b-[4px] eye-happy' : ''}
+                            ${faceState === 'confused' ? 'w-[52px] h-[72px] rounded-t-[14px] rounded-b-[4px] -rotate-6 eye-confused' : ''}
+                            ${faceState === 'error' ? 'w-[64px] h-[16px] rounded-[4px] eye-error' : ''}
+                            ${faceState === 'music' ? 'w-[64px] h-[80px] rounded-[20px] eye-music eye-music-glow' : ''}
                           `}
                         >
                           {/* Inner Reflection Highlights */}
@@ -627,15 +630,15 @@ const toggleListening = () => {
                         {/* Eye Right */}
                         <div 
                           className={`
-                            relative bg-white rounded-[14px] transition-all duration-300 ease-out
-                            ${faceState === 'idle' ? 'w-[64px] h-[80px] blinking' : ''}
-                            ${faceState === 'listening' ? 'w-[64px] h-[88px] bg-status-listening' : ''}
-                            ${faceState === 'thinking' ? 'w-[64px] h-[80px] bg-status-thinking' : ''}
-                            ${faceState === 'talking' ? 'w-[64px] h-[80px] eye-talking' : ''}
-                            ${faceState === 'happy' ? 'w-[72px] h-[68px] rounded-t-[40px] rounded-b-[4px] bg-status-happy' : ''}
-                            ${faceState === 'confused' ? 'w-[64px] h-[60px] rounded-t-[4px] rounded-b-[14px] rotate-6 bg-status-confused' : ''}
-                            ${faceState === 'error' ? 'w-[64px] h-[16px] rounded-[4px] bg-status-error' : ''}
-                            ${faceState === 'music' ? 'w-[64px] h-[80px] rounded-[20px] eye-music bg-status-music' : ''}
+                            relative rounded-[14px] transition-all duration-300 ease-out
+                            ${faceState === 'idle' ? 'w-[64px] h-[80px] blinking eye-idle' : ''}
+                            ${faceState === 'listening' ? 'w-[64px] h-[88px] eye-listening' : ''}
+                            ${faceState === 'thinking' ? 'w-[64px] h-[80px] eye-thinking' : ''}
+                            ${faceState === 'talking' ? 'w-[64px] h-[80px] eye-talking eye-idle' : ''}
+                            ${faceState === 'happy' ? 'w-[72px] h-[68px] rounded-t-[40px] rounded-b-[4px] eye-happy' : ''}
+                            ${faceState === 'confused' ? 'w-[64px] h-[60px] rounded-t-[4px] rounded-b-[14px] rotate-6 eye-confused' : ''}
+                            ${faceState === 'error' ? 'w-[64px] h-[16px] rounded-[4px] eye-error' : ''}
+                            ${faceState === 'music' ? 'w-[64px] h-[80px] rounded-[20px] eye-music eye-music-glow' : ''}
                           `}
                         >
                           {/* Inner Reflection Highlights */}
@@ -651,10 +654,10 @@ const toggleListening = () => {
                       }`}>
                         <svg width="40" height="20" viewBox="0 0 40 20" fill="none" className="transition-all duration-300">
                           {faceState === 'talking' && (
-                            <path d="M5 10 Q20 4 35 10" stroke="#ffffff" strokeWidth="3" strokeLinecap="round" />
+                            <path d="M5 10 Q20 4 35 10" stroke="#3de8c4" strokeWidth="3" strokeLinecap="round" />
                           )}
                           {faceState === 'happy' && (
-                            <path d="M8 5 Q20 18 32 5" stroke="#10b981" strokeWidth="3.5" strokeLinecap="round" />
+                            <path d="M8 5 Q20 18 32 5" stroke="#3de8c4" strokeWidth="3.5" strokeLinecap="round" />
                           )}
                           {faceState === 'error' && (
                             <path d="M10 15 Q20 5 30 15" stroke="#ef4444" strokeWidth="3" strokeLinecap="round" />
@@ -663,7 +666,7 @@ const toggleListening = () => {
                             <path d="M8 10 Q14 5 20 10 T32 10" stroke="#f59e0b" strokeWidth="3" strokeLinecap="round" />
                           )}
                           {faceState === 'music' && (
-                            <circle cx="20" cy="10" r="6" stroke="#ec4899" strokeWidth="3" fill="transparent" />
+                            <circle cx="20" cy="10" r="6" stroke="#a855f7" strokeWidth="3" fill="transparent" />
                           )}
                         </svg>
                       </div>
@@ -673,26 +676,26 @@ const toggleListening = () => {
                 </div>
 
                 {/* Ear Tabs right */}
-                <div className={`absolute -right-[16px] w-[20px] h-[52px] rounded-r-sm border-r border-y border-white/5 z-0 bg-[#0a0a0a] ${
+                <div className={`absolute -right-[16px] w-[20px] h-[52px] rounded-r-md border-r border-y border-[#d4d4d8] z-0 bg-[#e4e4e7] ${
                   faceState === 'error' ? 'face-shake bg-status-error/10' : ''
                 }`} />
               </div>
 
               {/* Manual Command Terminal Bar */}
-              <form onSubmit={handleManualSubmit} className="w-full max-w-md bg-black border border-white/5 rounded-sm p-3.5 flex items-center gap-2 focus-within:border-white/20 transition-all duration-200">
-                <span className="font-mono text-xs text-white/50 pl-1 uppercase font-semibold">nimo$</span>
+              <form onSubmit={handleManualSubmit} className="w-full max-w-md bg-black border border-[#3de8c4]/10 rounded-sm p-3.5 flex items-center gap-2 focus-within:border-[#3de8c4]/30 transition-all duration-200">
+                <span className="font-mono text-xs text-[#3de8c4] pl-1 uppercase font-semibold">nimo$</span>
                 <input
                   type="text"
                   value={manualInput}
                   onChange={(e) => setManualInput(e.target.value)}
                   placeholder="Ask a question or enter local commands..."
-                  className="flex-grow bg-transparent text-xs text-white border-none outline-none focus:ring-0 placeholder:text-white/20"
+                  className="flex-grow bg-transparent text-xs text-white border-none outline-none focus:ring-0 placeholder:text-white/10"
                   disabled={faceState === 'thinking'}
                 />
                 <button
                   type="submit"
                   disabled={faceState === 'thinking' || manualInput.trim() === ""}
-                  className="p-1.5 rounded-sm bg-white/5 text-white/70 hover:text-white hover:bg-white/10 active:scale-95 disabled:opacity-35 transition-all"
+                  className="p-1.5 rounded-sm bg-white/5 text-[#3de8c4]/70 hover:text-[#3de8c4] hover:bg-[#3de8c4]/10 active:scale-95 disabled:opacity-35 transition-all"
                 >
                   <Send className="h-3.5 w-3.5" />
       </button>
@@ -723,7 +726,7 @@ const toggleListening = () => {
             rel="noopener noreferrer"
             className="block group"
           >
-            <p className="text-xs text-emerald-400/90 font-medium leading-snug group-hover:underline decoration-emerald-400/40">
+            <p className="text-xs text-[#3de8c4]/90 font-medium leading-snug group-hover:underline decoration-[#3de8c4]/40">
               {r.title}
             </p>
             <p className="text-[10px] text-white/40 font-mono truncate mt-0.5">{r.url}</p>
@@ -737,21 +740,21 @@ const toggleListening = () => {
   </div>
 )}
 
-{/* Active countdown timers if any */}
+              {/* Active countdown timers if any */}
               {backendTimers.length > 0 && (
                 <div className="w-full max-w-md flex flex-col gap-2">
                   <p className="font-mono text-[10px] text-white/30 uppercase tracking-[0.2em] pl-1 flex items-center gap-1.5">
-                    <Clock className="h-3 w-3 animate-spin text-emerald-500" />
+                    <Clock className="h-3 w-3 animate-spin text-[#3de8c4]" />
                     Active Countdown Timers
                   </p>
                   {backendTimers.map(timer => (
-                    <div key={timer.id} className="bg-[#0a0a0a] border border-white/5 p-3.5 rounded-sm flex items-center justify-between">
+                    <div key={timer.id} className="bg-[#0a0a0a] border border-[#3de8c4]/5 p-3.5 rounded-sm flex items-center justify-between">
                       <div className="flex flex-col gap-0.5">
                         <span className="text-xs text-white/80 font-medium">{timer.label}</span>
                         <span className="font-mono text-[9px] text-white/30 uppercase tracking-wider">Active Node Countdown</span>
                       </div>
                       <div className="flex items-center gap-3">
-                        <span className="font-mono text-xs text-emerald-500 font-bold bg-emerald-500/10 px-2.5 py-1 rounded-sm border border-emerald-500/20">{timer.remaining}s</span>
+                        <span className="font-mono text-xs text-[#3de8c4] font-bold bg-[#3de8c4]/10 px-2.5 py-1 rounded-sm border border-[#3de8c4]/20">{timer.remaining}s</span>
                       </div>
                     </div>
                   ))}
@@ -806,10 +809,10 @@ const toggleListening = () => {
                   ) : (
                     logsList.map((log) => {
                       let catColor = "bg-neutral-800/50 text-neutral-400 border border-neutral-700/30";
-                      if (log.category === "voice") catColor = "bg-[#10b981]/10 text-[#10b981] border border-[#10b981]/20";
+                      if (log.category === "voice") catColor = "bg-[#3de8c4]/10 text-[#3de8c4] border border-[#3de8c4]/20";
                       if (log.category === "intent") catColor = "bg-blue-500/10 text-blue-400 border border-blue-500/20";
                       if (log.category === "ai") catColor = "bg-white/5 text-white/80 border border-white/10";
-                      if (log.category === "action") catColor = "bg-emerald-500/10 text-emerald-400 border border-emerald-500/20";
+                      if (log.category === "action") catColor = "bg-[#3de8c4]/10 text-[#3de8c4] border border-[#3de8c4]/20";
                       if (log.category === "error") catColor = "bg-red-500/10 text-red-400 border border-red-500/20";
 
                       return (
@@ -1092,11 +1095,11 @@ const toggleListening = () => {
             <div className="w-80 p-6 flex flex-col h-full flex-grow overflow-hidden">
               <div className="flex items-center justify-between mb-4 border-b border-white/5 pb-3 shrink-0">
                 <div className="flex items-center gap-2">
-                  <span className="flex h-1.5 w-1.5 rounded-full bg-emerald-500 shadow-[0_0_8px_rgba(16,185,129,0.4)] animate-pulse"></span>
+                  <span className="flex h-1.5 w-1.5 rounded-full bg-[#3de8c4] shadow-[0_0_8px_rgba(61,232,196,0.4)] animate-pulse"></span>
                   <h2 className="font-mono text-[9px] uppercase tracking-[0.2em] text-white/30">Live Event Log</h2>
                 </div>
                 <div className="flex items-center gap-2">
-                  <span className="font-mono text-[8px] text-emerald-500 bg-emerald-500/10 border border-emerald-500/20 px-2.5 py-0.5 rounded-sm font-bold uppercase tracking-wider">Sync OK</span>
+                  <span className="font-mono text-[8px] text-[#3de8c4] bg-[#3de8c4]/10 border border-[#3de8c4]/20 px-2.5 py-0.5 rounded-sm font-bold uppercase tracking-wider">Sync OK</span>
                   <button 
                     onClick={() => setShowLogsSidebar(false)}
                     className="md:hidden text-white/40 hover:text-white transition-colors"
@@ -1115,7 +1118,7 @@ const toggleListening = () => {
                 ) : (
                   logsList.map((log) => {
                     const textClass = log.category === "error" ? "text-red-400/90" : 
-                                      log.category === "voice" ? "text-emerald-400/90" :
+                                      log.category === "voice" ? "text-[#3de8c4]/90" :
                                       log.category === "intent" ? "text-blue-400/90" :
                                       "text-white/50";
 
