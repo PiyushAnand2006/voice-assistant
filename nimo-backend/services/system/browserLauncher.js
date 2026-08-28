@@ -68,7 +68,7 @@ function detectBrowsers() {
     ].filter(fileExists)
     if (chromePaths.length) candidates.push({
       name: 'chrome',
-      cmd: (url, extraFlags = []) => `start "" "${chromePaths[0]}" --new-window ${extraFlags.join(' ')} ${quoteWin(url)}`
+      cmd: (url, extraFlags = []) => `start "" "${chromePaths[0]}" ${extraFlags.join(' ')} ${quoteWin(url)}`
     })
 
     const edgePaths = [
@@ -77,7 +77,7 @@ function detectBrowsers() {
     ].filter(fileExists)
     if (edgePaths.length) candidates.push({
       name: 'edge',
-      cmd: (url) => `start "" "${edgePaths[0]}" --new-window ${quoteWin(url)}`
+      cmd: (url) => `start "" "${edgePaths[0]}" ${quoteWin(url)}`
     })
 
     const firefoxPaths = [
@@ -86,32 +86,32 @@ function detectBrowsers() {
     ].filter(fileExists)
     if (firefoxPaths.length) candidates.push({
       name: 'firefox',
-      cmd: (url) => `start "" "${firefoxPaths[0]}" -new-window ${quoteWin(url)}`
+      cmd: (url) => `start "" "${firefoxPaths[0]}" -new-tab ${quoteWin(url)}`
     })
   } else if (process.platform === 'darwin') {
     if (fileExists('/Applications/Google Chrome.app')) candidates.push({
       name: 'chrome',
-      cmd: (url, extraFlags = []) => `open -a "Google Chrome" -n --args --new-window ${extraFlags.join(' ')} ${quoteShell(url)}`
+      cmd: (url, extraFlags = []) => `open -a "Google Chrome" ${quoteShell(url)} ${extraFlags.join(' ')}`
     })
     if (fileExists('/Applications/Google Chrome Canary.app')) candidates.push({
       name: 'chrome-canary',
-      cmd: (url, extraFlags = []) => `open -a "Google Chrome Canary" -n --args --new-window ${extraFlags.join(' ')} ${quoteShell(url)}`
+      cmd: (url, extraFlags = []) => `open -a "Google Chrome Canary" ${quoteShell(url)} ${extraFlags.join(' ')}`
     })
     if (fileExists('/Applications/Microsoft Edge.app')) candidates.push({
       name: 'edge',
-      cmd: (url) => `open -a "Microsoft Edge" -n --args --new-window ${quoteShell(url)}`
+      cmd: (url) => `open -a "Microsoft Edge" ${quoteShell(url)}`
     })
     if (fileExists('/Applications/Firefox.app')) candidates.push({
       name: 'firefox',
-      cmd: (url) => `open -a "Firefox" -n ${quoteShell(url)}`
+      cmd: (url) => `open -a "Firefox" ${quoteShell(url)}`
     })
   } else {
     const candidatesLinux = [
-      { name: 'google-chrome', cmd: (url, extraFlags = []) => `google-chrome --new-window ${extraFlags.join(' ')} ${quoteShell(url)}` },
-      { name: 'chromium', cmd: (url, extraFlags = []) => `chromium --new-window ${extraFlags.join(' ')} ${quoteShell(url)}` },
-      { name: 'chromium-browser', cmd: (url, extraFlags = []) => `chromium-browser --new-window ${extraFlags.join(' ')} ${quoteShell(url)}` },
-      { name: 'microsoft-edge', cmd: (url) => `microsoft-edge --new-window ${quoteShell(url)}` },
-      { name: 'firefox', cmd: (url) => `firefox -new-window ${quoteShell(url)}` }
+      { name: 'google-chrome', cmd: (url, extraFlags = []) => `google-chrome ${extraFlags.join(' ')} ${quoteShell(url)}` },
+      { name: 'chromium', cmd: (url, extraFlags = []) => `chromium ${extraFlags.join(' ')} ${quoteShell(url)}` },
+      { name: 'chromium-browser', cmd: (url, extraFlags = []) => `chromium-browser ${extraFlags.join(' ')} ${quoteShell(url)}` },
+      { name: 'microsoft-edge', cmd: (url) => `microsoft-edge ${quoteShell(url)}` },
+      { name: 'firefox', cmd: (url) => `firefox -new-tab ${quoteShell(url)}` }
     ]
     for (const c of candidatesLinux) {
       try {

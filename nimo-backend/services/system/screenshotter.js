@@ -17,7 +17,7 @@ const { NimoError } = require('../../utils/errorHandler')
 /**
  * Capture the screen containing the focused window (or the primary display)
  * and write it to disk as a PNG.
- * @returns {Promise<{path:string, filename:string}>}
+ * @returns {Promise<{path:string,filename:string}>}
  */
 async function takeScreenshot() {
   let sources

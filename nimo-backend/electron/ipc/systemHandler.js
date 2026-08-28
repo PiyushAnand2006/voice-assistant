@@ -121,6 +121,13 @@ function registerSystemHandlers(mainWindow) {
   })
 }
 
+module.exports = {
+  registerSystemHandlers,
+  registerTimerDispatcher,
+  currentTimeDate,
+  constants: { VOLUME_STEP: constants.VOLUME_STEP }
+}
+
 /**
  * A minimal weather "summary" without an external API key:
  * opens a weather query in the user's browser and returns a short spoken line.
@@ -135,11 +142,4 @@ async function buildWeatherSummary(city) {
   } catch {
     return "I couldn't fetch the weather right now."
   }
-}
-
-module.exports = {
-  registerSystemHandlers,
-  registerTimerDispatcher,
-  currentTimeDate,
-  constants: { VOLUME_STEP: constants.VOLUME_STEP }
 }

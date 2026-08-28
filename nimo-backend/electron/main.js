@@ -18,6 +18,7 @@ const logger = require('../utils/logger')
 const { registerAllIpc, dispatchIntent } = require('./ipc')
 const { parseCommand } = require('../core/commandParser')
 const { currentTimeDate } = require('./ipc/systemHandler')
+const timerManager = require('../services/system/timerManager')
 
 // Refs we need to keep alive.
 let mainWindow = null
@@ -115,6 +116,33 @@ function startBackendHttpServer() {
           speak: "Something went wrong on my end.",
           state: 'error'
         })
+      }
+    }
+
+    // GET /api/timers — list active timers with remaining seconds
+    if (req.method === 'GET' && pathname === '/api/timers') {
+      try {
+        const timers = timerManager.listTimers().map(t => ({
+          id: t.id,
+          label: t.label,
+          minutes: t.minutes,
+          remaining: Math.max(0, Math.round(t.remainingMs / 1000)),
+          active: t.remainingMs > 0
+        }))
+        return sendJson(res, 200, { ok: true, timers })
+      } catch (err) {
+        return sendJson(res, 200, { ok: false, timers: [], error: err.message })
+      }
+    }
+
+    // POST /api/timers/cancel — cancel a timer by id
+    if (req.method === 'POST' && pathname === '/api/timers/cancel') {
+      try {
+        const body = await parseBody(req)
+        const ok = timerManager.cancelTimer(body.id)
+        return sendJson(res, 200, { ok, cancelled: ok })
+      } catch (err) {
+        return sendJson(res, 200, { ok: false, error: err.message })
       }
     }
 

@@ -1,4 +1,4 @@
-import React, { useState, useEffect, useRef } from "react";
+import React, { useState, useEffect, useRef, useCallback } from "react";
 import { 
   Bot, 
   Terminal, 
@@ -18,7 +18,9 @@ import {
   Zap,
   Send,
   AlertCircle,
-  Globe
+  Globe,
+  Bell,
+  X
 } from "lucide-react";
 import { motion, AnimatePresence } from "motion/react";
 import { SearchResult } from "./types";
@@ -66,16 +68,59 @@ export default function App() {
     uptime: 0
   });
   const [systemTime, setSystemTime] = useState("");
+  const [timerNotifications, setTimerNotifications] = useState<Array<{id:string,label:string}>>([]);
 
-  // Live UTC Clock updater
+  // Live local Clock with hr:min:sec
   useEffect(() => {
     const updateTime = () => {
       const now = new Date();
-      setSystemTime(now.toUTCString().replace("GMT", "UTC").split(" ")[4]);
+      const h = now.getHours().toString().padStart(2, "0");
+      const m = now.getMinutes().toString().padStart(2, "0");
+      const s = now.getSeconds().toString().padStart(2, "0");
+      setSystemTime(`${h}:${m}:${s}`);
     };
     updateTime();
     const interval = setInterval(updateTime, 1000);
     return () => clearInterval(interval);
+  }, []);
+
+  // Timer-done event listener (from backend via Electron IPC or polling fallback)
+  useEffect(() => {
+    // Try Electron IPC first
+    if ((window as any).nimo?.on) {
+      const unsub = (window as any).nimo.on('nimo:timer-done', (payload: any) => {
+        if (payload) {
+          setTimerNotifications(prev => [...prev, { id: payload.id || Date.now().toString(), label: payload.label || 'Timer' }]);
+          speakMessage(`${payload.label || 'Timer'} is done!`, 'happy');
+          // Auto-dismiss after 8 seconds
+          setTimeout(() => {
+            setTimerNotifications(prev => prev.filter(n => n.id !== (payload.id || '')))
+          }, 8000);
+        }
+      });
+      return () => { if (typeof unsub === 'function') unsub() }
+    }
+  }, []);
+
+  // Poll active timers from backend (fallback for timer-done detection)
+  const syncTimers = useCallback(async () => {
+    try {
+      const res = await fetch("/api/timers");
+      if (res.ok) {
+        const data = await res.json();
+        if (data.timers) {
+          setBackendTimers(data.timers.map((t: any) => ({
+            id: t.id,
+            duration: t.minutes * 60,
+            remaining: t.remaining,
+            label: t.label,
+            active: t.active
+          })))
+        }
+      }
+    } catch {
+      // ignore
+    }
   }, []);
 
 // Fetch logs and timers from Express backend
@@ -90,6 +135,8 @@ export default function App() {
     } catch (err) {
       console.error("Failed to sync backend logs and timers:", err);
     }
+    // Also poll the dedicated timers endpoint for accurate remaining time
+    await syncTimers();
   };
 
   // Poll backend logs & timers frequently (every 1 second)
@@ -395,6 +442,33 @@ const toggleListening = () => {
   return (
     <div className="bg-app-bg text-white font-sans h-screen w-screen overflow-hidden flex flex-col md:flex-row select-none">
       
+      {/* Timer Done Notifications */}
+      <AnimatePresence>
+        {timerNotifications.map(notif => (
+          <motion.div
+            key={notif.id}
+            initial={{ opacity: 0, y: -40, scale: 0.9 }}
+            animate={{ opacity: 1, y: 0, scale: 1 }}
+            exit={{ opacity: 0, y: -20, scale: 0.95 }}
+            className="fixed top-4 left-1/2 -translate-x-1/2 z-[100] bg-[#0a0a0a] border border-[#3de8c4]/40 rounded-lg px-5 py-3 flex items-center gap-3 shadow-[0_0_20px_rgba(61,232,196,0.15)]"
+          >
+            <div className="h-8 w-8 rounded-full bg-[#3de8c4]/15 flex items-center justify-center">
+              <Bell className="h-4 w-4 text-[#3de8c4] animate-bounce" />
+            </div>
+            <div className="flex flex-col">
+              <span className="text-xs text-white font-semibold">{notif.label} is done!</span>
+              <span className="text-[10px] text-white/40 font-mono">Timer completed</span>
+            </div>
+            <button
+              onClick={() => setTimerNotifications(prev => prev.filter(n => n.id !== notif.id))}
+              className="ml-2 p-1 rounded-sm hover:bg-white/5 text-white/30 hover:text-white transition-colors"
+            >
+              <X className="h-3.5 w-3.5" />
+            </button>
+          </motion.div>
+        ))}
+      </AnimatePresence>
+      
       {/* Mobile Top Header */}
       <header className="md:hidden flex items-center justify-between px-6 py-4 border-b border-outline-variant bg-[#0a0a0a] z-50">
         <div className="flex items-center gap-2">
@@ -528,7 +602,7 @@ const toggleListening = () => {
           <div className="flex items-center gap-6">
             <div className="hidden sm:flex flex-col text-right">
               <span className="text-[10px] text-white/30 uppercase tracking-[0.2em]">System Time</span>
-              <span className="text-xs font-mono text-white/80">{systemTime || "00:00:00 UTC"}</span>
+              <span className="text-xs font-mono text-white/80">{systemTime || "00:00:00"}</span>
             </div>
             <div className="hidden sm:block w-px h-8 bg-white/10"></div>
             <div className="flex gap-2 items-center">
@@ -682,7 +756,7 @@ const toggleListening = () => {
               </div>
 
               {/* Manual Command Terminal Bar */}
-              <form onSubmit={handleManualSubmit} className="w-full max-w-md bg-black border border-[#3de8c4]/10 rounded-sm p-3.5 flex items-center gap-2 focus-within:border-[#3de8c4]/30 transition-all duration-200">
+              <form onSubmit={handleManualSubmit} className="w-full max-w-md bg-black border border-[#3de8c4]/30 rounded-sm p-3.5 flex items-center gap-2 focus-within:border-[#3de8c4]/60 transition-all duration-200 shadow-[0_0_8px_rgba(61,232,196,0.05)]">
                 <span className="font-mono text-xs text-[#3de8c4] pl-1 uppercase font-semibold">nimo$</span>
                 <input
                   type="text"
